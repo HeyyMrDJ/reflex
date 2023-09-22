@@ -1,0 +1,21 @@
+{{ define "content" }}
+    <div class="centered-card">
+        <div class="card">
+            <h1>Edit Entry</h1>
+            
+            <form action="/set" method="POST">
+                <select name="route" name="route" id="route">
+                    {{range .}}
+                    <option value="{{.Key}}">{{.Key}}</option>
+                    {{end}}
+                </select>
+                
+                <label for="flex">Destination:</label>
+                <input type="text" name="flex" placeholder="Enter a value">
+                <button type="submit">Submit</button>
+            </form>
+            
+            <a href="/">Back to Home</a>
+        </div>
+    </div>
+{{ end }}

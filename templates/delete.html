@@ -1,0 +1,40 @@
+            
+{{ define "content" }}
+    <div class="centered-card">
+        <div class="card">
+            <h1>Edit Entry</h1>
+            
+            <form action="/deleteme" method="POST" onsubmit="return validateForm()">
+                <select name="route" id="route">
+                    {{range .}}
+                    <option value="{{.Key}}">{{.Key}}</option>
+                    {{end}}
+                </select>
+                
+                <label for="flex">Destination:</label>
+                <input type="text" name="flex" id="flex" placeholder="Enter a value">
+                <button type="submit">Submit</button>
+            </form>
+            
+            <a href="/">Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Get the selected route from the dropdown
+            var selectedRoute = document.getElementById("route").value;
+
+            // Get the value entered by the user
+            var enteredFlex = document.getElementById("flex").value;
+
+            // Check if the selected route matches the entered flex
+            if (selectedRoute === enteredFlex) {
+                return true; // Form submission allowed
+            } else {
+                alert("Route and Flex values do not match. Please select the correct Route.");
+                return false; // Form submission blocked
+            }
+        }
+    </script>
+{{ end }}

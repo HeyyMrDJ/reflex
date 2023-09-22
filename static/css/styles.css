@@ -1,0 +1,86 @@
+/* style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #FFFFFF; /* Dark blue text */
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #000;
+    color: #fff; /* White text */
+    padding: 10px;
+    text-align: center;
+    margin: 0;
+}
+
+.navbar {
+    background-color: #222; /* Darker background */
+    padding: 10px;
+    text-align: left;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #0074d9; /* Bright blue link color */
+    margin: 10px;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.card {
+    background-color: #222; /* Darker background */
+    border: 1px solid #444;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+.card-header {
+    color: #fff; /* White text for card header */
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.card-text {
+    color: #bbb; /* Lighter text color for card content */
+}
+
+.centered-card .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%; /* Adjust the width as needed */
+    max-width: 400px; /* Set a maximum width if necessary */
+    margin: 0 auto; /* Center the card horizontally */
+    margin-top: 100px;
+}
+
+.centered-card .card form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.centered-card .card form label,
+.centered-card .card form input,
+.centered-card .card form button {
+    width: 100%; /* Make form elements take the full width of the card */
+}
+
+button {
+    margin-top: 20px;
+    color: blue;
+    background-color: #000047;
+    border-radius: 8px;
+}
+
+label {
+    margin-top: 20px;
+}
+

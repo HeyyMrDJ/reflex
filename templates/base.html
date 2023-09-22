@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Re/{flex}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to Re/{flex}</h1>
+    </div>
+    <nav class="navbar">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/create">New Flex</a>
+        <a class="nav-link" href="/update">Edit Flex</a>
+        <a class="nav-link" href="/delete">Delete Flex</a>
+    </nav>
+    {{ template "content" . }}
+</body>
+</html>
