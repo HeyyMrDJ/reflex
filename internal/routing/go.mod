@@ -3,6 +3,7 @@ module routing
 go 1.21.1
 
 require (
+	github.com/HeyyMrDJ/reflex v0.1.2
 	github.com/gorilla/mux v1.8.0
 	github.com/prometheus/client_golang v1.16.0
 	github.com/redis/go-redis/v9 v9.2.0
