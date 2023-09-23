@@ -1,0 +1,45 @@
+name: Trigger auto deployment for reflex-web
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '//**'
+    - '.github/workflows/reflex-web-AutoDeployTrigger-7d0d2edf-1c93-4a1b-a927-d3534122193a.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.REFLEXWEB_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.REFLEXWEB_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.REFLEXWEB_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: djreflex.azurecr.io
+          registryUsername: ${{ secrets.REFLEXWEB_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.REFLEXWEB_REGISTRY_PASSWORD }}
+          containerAppName: reflex-web
+          resourceGroup: reflex
+          imageToBuild: djreflex.azurecr.io/reflex-web:${{ github.sha }}
+          dockerfilePath: Dockerfile
+
+
