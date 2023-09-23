@@ -19,7 +19,7 @@ require (
 	github.com/prometheus/procfs v0.12.0 // indirect
 	golang.org/x/sys v0.12.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
-    github.com/HeyyMrDJ/reflex/internal/redisreflex
+    github.com/HeyyMrDJ/reflex/internal/redisreflex v0.1.0
 
 
 )
