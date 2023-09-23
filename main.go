@@ -13,8 +13,7 @@ import (
     "github.com/prometheus/client_golang/prometheus"
     "github.com/prometheus/client_golang/prometheus/promauto"
     "github.com/prometheus/client_golang/prometheus/promhttp"
-    "https://github.com/HeyyMrDJ/reflex/internal/redis"
-    "./redis.go"
+    "github.com/HeyyMrDJ/reflex/internal/redis-reflex"
 )
 
 var ctx = context.Background()

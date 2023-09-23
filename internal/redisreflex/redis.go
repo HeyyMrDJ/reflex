@@ -1,3 +1,14 @@
+package redisreflex
+
+import (
+    "github.com/redis/go-redis/v9"
+    "context"
+    "os"
+)
+
+var ctx = context.Background()
+var redisClient *redis.Client
+
 func InitializeRedisClient() {
     REDIS_ADDR := os.Getenv("REDIS_ADDR")
     REDIS_PORT := os.Getenv("REDIS_PORT")
