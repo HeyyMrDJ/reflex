@@ -47,7 +47,6 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
         for _, key := range keys {
             val, _ := redisreflex.GetRedisValue(key, *&redisClient, ctx)
             kv := keyValue{key, val}
-            fmt.Println("key", val)
             my_keys = append(my_keys, kv)
         }
 
@@ -96,13 +95,16 @@ func createFlex(w http.ResponseWriter, r *http.Request) {
     }
     value := r.PostFormValue("flex")
 
+    log.Print("Creating flex: ", route)
     err := redisreflex.SetRedisValue(route, value, *&redisClient, ctx)
     if err != nil {
         fmt.Fprintln(w, "Failed to set Redis value:", err)
         http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+        log.Fatal("Failed to create route: ", route)
         return
     }
 
+    log.Print("Flex created successfully: ", route)
     // Redirect to the home page with a 200 status code
     fmt.Fprintln(w, "Redis value set successfully")
     fmt.Fprintln(w, "Route:",route,"\tValue:", value)
@@ -120,13 +122,16 @@ func deleteFlex(w http.ResponseWriter, r *http.Request) {
     fmt.Println("deleteflex", r.PostFormValue("flex"))
 
 
+    log.Print("Deleting flex: ", route)
     err := redisreflex.DeleteRedisValue(route, *&redisClient, ctx)
     if err != nil {
         fmt.Fprintln(w, "Failed to delete Redis value:", err)
         http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+        log.Fatal("Failed to delete Redis value: ", route)
         return
     }
 
+    log.Print("Flex deleted successfully:", route)
     // Redirect to the home page with a 200 status code
     fmt.Fprintln(w, "Redis value deleted successfully")
     fmt.Fprintln(w, route)
@@ -139,6 +144,7 @@ func updateFlex(w http.ResponseWriter, r *http.Request) {
     value := r.PostFormValue("flex")
     fmt.Println(value)
 
+    log.Print("Updating flex: ", value)
     _, err := redisreflex.GetRedisValue(route, *&redisClient, ctx)
     if err != nil {
         NotFound(w, r, route)
@@ -149,9 +155,11 @@ func updateFlex(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         fmt.Fprintln(w, "Failed to set Redis value:", err)
         http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+        log.Fatal("Failed to update flex")
         return
     }
 
+    log.Print("Flex updated successfully")
     // Redirect to the home page with a 200 status code
     fmt.Fprintln(w, "Redis value updated successfully")
     fmt.Fprintln(w, route)
@@ -255,6 +263,7 @@ func recordRouteHit(route string) {
 
 
 func InitializeRedisClient() {
+    log.Print("Starting Redis Client")
     REDIS_ADDR := os.Getenv("REDIS_ADDR")
     REDIS_PORT := os.Getenv("REDIS_PORT")
 
@@ -263,6 +272,7 @@ func InitializeRedisClient() {
         Password: "",              // No password by default
         DB:       0,               // Default DB
     })
+    log.Print("Redis Client started")
 }
 
 var (
