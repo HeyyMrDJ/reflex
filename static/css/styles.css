@@ -101,11 +101,6 @@ label {
 }
 .card-text:hover {
   overflow: visible;
-  color: white;
-}
-.card:hover {
-    transform: scale(1.02);
-    background-color: #111111
 }
 
 #route {
@@ -174,3 +169,28 @@ form input {
 	border-right: 5px solid transparent;
 	border-left: 5px solid transparent;
 }
+
+
+.item {
+    background-color: #222; /* Darker background */
+    border: 2px solid #444;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    width: 20%;
+    opacity: .8;
+    /*overflow-wrap: break-word;*/
+}
+
+.item:hover {
+    transform: scale(1.02);
+    background-color: #111111
+}
+
+.item a:hover {
+    font-size: 30px;
+    color: white; /* Bright blue link color */
+    background-color: black;
+    /* Add any other styles you want */
+}
+

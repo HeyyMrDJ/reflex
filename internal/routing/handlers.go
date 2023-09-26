@@ -17,6 +17,12 @@ import (
 var ctx = context.Background()
 var redisClient *redis.Client
 
+type Message struct {
+    Action  string
+    Flex    string
+    Route   string
+}
+
 func NotFound(w http.ResponseWriter, r *http.Request, route string) {
     // Set a custom message in the response body
     w.WriteHeader(http.StatusNotFound)
@@ -106,8 +112,20 @@ func createFlex(w http.ResponseWriter, r *http.Request) {
 
     log.Print("Flex created successfully: ", route)
     // Redirect to the home page with a 200 status code
-    fmt.Fprintln(w, "Redis value set successfully")
-    fmt.Fprintln(w, "Route:",route,"\tValue:", value)
+    //fmt.Fprintln(w, "Redis value set successfully")
+    //fmt.Fprintln(w, "Route:",route,"\tValue:", value)
+
+    tmpl, err := template.ParseFiles("templates/body.html", "templates/base.html")
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+    msg := Message{"Flex Created: ", route, value}
+    err = tmpl.ExecuteTemplate(w, "base.html", msg)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+    }
+
 }
 
 func deleteFlex(w http.ResponseWriter, r *http.Request) {
@@ -133,8 +151,16 @@ func deleteFlex(w http.ResponseWriter, r *http.Request) {
 
     log.Print("Flex deleted successfully:", route)
     // Redirect to the home page with a 200 status code
-    fmt.Fprintln(w, "Redis value deleted successfully")
-    fmt.Fprintln(w, route)
+    tmpl, err := template.ParseFiles("templates/body.html", "templates/base.html")
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+    msg := Message{"Flex deleted: ", route, value}
+    err = tmpl.ExecuteTemplate(w, "base.html", msg)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+    }
 }
 
 func updateFlex(w http.ResponseWriter, r *http.Request) {
@@ -160,9 +186,16 @@ func updateFlex(w http.ResponseWriter, r *http.Request) {
     }
 
     log.Print("Flex updated successfully")
-    // Redirect to the home page with a 200 status code
-    fmt.Fprintln(w, "Redis value updated successfully")
-    fmt.Fprintln(w, route)
+    tmpl, err := template.ParseFiles("templates/body.html", "templates/base.html")
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+    msg := Message{"Flex updated: ", route, value}
+    err = tmpl.ExecuteTemplate(w, "base.html", msg)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+    }
 }
 
 func serveCreate(w http.ResponseWriter, r *http.Request) {

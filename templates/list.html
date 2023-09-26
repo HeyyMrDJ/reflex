@@ -1,7 +1,7 @@
 {{ define "content" }}
     {{range .}}
-    <div class="card">
-        <div class="card-header"><a href="{{.Value}}">re/{{.Key}}</div>
+    <div class="item">
+        <div class="card-header"><a href="{{.Value}}">re/{{.Key}}</a></div>
         <div class="card-text">{{ .Value }}</div>
     </div>
     {{end}}
