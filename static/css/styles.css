@@ -16,6 +16,7 @@ body {
     margin: 0;
 }
 
+
 .navbar {
     background-color: #222; /* Darker background */
     padding: 10px;
@@ -25,19 +26,25 @@ body {
 .nav-link {
     text-decoration: none;
     color: #0074d9; /* Bright blue link color */
-    margin: 10px;
+    margin: 0; /* Remove top and bottom margin */
+    /*display: block; /* Make the links block-level elements */
+    padding: 10px; /* Add padding to control the link's height */
 }
 
 .nav-link:hover {
-    text-decoration: underline;
+    background-color: #111111;
 }
+
 
 .card {
     background-color: #222; /* Darker background */
-    border: 1px solid #444;
+    border: 2px solid #444;
     padding: 10px;
     margin: 10px;
     border-radius: 8px;
+    width: 20%;
+    opacity: .8;
+    /*overflow-wrap: break-word;*/
 }
 
 .card-header {
@@ -48,6 +55,8 @@ body {
 
 .card-text {
     color: #bbb; /* Lighter text color for card content */
+    overflow: hidden;
+
 }
 
 .centered-card .card {
@@ -74,13 +83,94 @@ body {
 }
 
 button {
-    margin-top: 20px;
-    color: blue;
-    background-color: #000047;
-    border-radius: 8px;
+    color: white;
+    background-color: black;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: 0px;
+}
+
+button:hover {
+  colar: black;
+  transform: scale(1.02);
 }
 
 label {
-    margin-top: 20px;
+    margin-top: 0px;
+}
+.card-text:hover {
+  overflow: visible;
+  color: white;
+}
+.card:hover {
+    transform: scale(1.02);
+    background-color: #111111
 }
 
+#route {
+    /*margin-bottom: 20px;*/
+    width: 200px;
+    height: 30px;
+    background-color: #000000;
+    color: white;
+    margin-bottom: 20px;
+}
+
+#route form input{
+    background-color: #ffffff;
+    color: #ffffff;
+
+}
+
+form input {
+    background-color: black;
+    color: white;
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border: 2px solid #444;
+    margin-bottom: 20px;
+}
+
+.select-dropdown,
+.select-dropdown * {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	box-sizing: border-box;
+}
+.select-dropdown {
+	position: relative;
+	background-color: #E6E6E6;
+	border-radius: 8px;
+    width: 200px;
+    height: 30px;
+}
+.select-dropdown select {
+	font-size: 1rem;
+	font-weight: normal;
+	max-width: 100%;
+	padding: 8px 24px 8px 10px;
+	border: none;
+	background-color: transparent;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+	appearance: none;
+}
+.select-dropdown select:active, .select-dropdown select:focus {
+	outline: none;
+	box-shadow: none;
+}
+.select-dropdown:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 8px;
+	width: 0;
+	height: 0;
+	margin-top: -2px;
+	border-top: 5px solid #aaa;
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+}

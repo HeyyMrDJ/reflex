@@ -10,6 +10,7 @@ COPY go.mod /app/
 COPY go.sum /app/
 COPY templates/ /app/templates/
 COPY static/ /app/static/
+COPY internal/ /app/internal/
 
 # Install Go dependencies using Go modules
 RUN go mod download

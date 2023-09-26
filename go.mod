@@ -1,6 +1,6 @@
 module github.com/HeyyMrDJ/reflex
 
-go 1.20
+go 1.21
 
 require (
 	github.com/gorilla/mux v1.8.0
@@ -19,6 +19,4 @@ require (
 	github.com/prometheus/procfs v0.12.0 // indirect
 	golang.org/x/sys v0.12.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
-    github.com/HeyyMrDJ/reflex/internal/routing v0.1.3
-
 )
