@@ -1,4 +1,14 @@
 /* style.css */
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column.side, .column.middle {
+    width: 100%;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -15,7 +25,6 @@ body {
     text-align: center;
     margin: 0;
 }
-
 
 .navbar {
     background-color: #222; /* Darker background */
@@ -34,7 +43,6 @@ body {
 .nav-link:hover {
     background-color: #111111;
 }
-
 
 .card {
     background-color: #222; /* Darker background */
@@ -99,6 +107,7 @@ button:hover {
 label {
     margin-top: 0px;
 }
+
 .card-text:hover {
   overflow: visible;
 }
@@ -172,14 +181,14 @@ form input {
 
 
 .item {
-    background-color: #222; /* Darker background */
+    background-color: #222;
     border: 2px solid #444;
     padding: 10px;
     margin: 10px;
     border-radius: 8px;
-    width: 20%;
+    width: 60%;
     opacity: .8;
-    /*overflow-wrap: break-word;*/
+    float: center;
 }
 
 .item:hover {
@@ -194,3 +203,34 @@ form input {
     /* Add any other styles you want */
 }
 
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+/* Left and right column */
+.column.side {
+  width: 25%;
+  border-style: solid;
+  border-color: #000;
+  border-radius: 5px;
+  border-width: 20px;
+  background-color: #000;
+  opacity: 0.9;
+
+}
+
+/* Middle column */
+.column.middle {
+  width: 50%;
+  margin: auto;
+  padding-left: 10%;
+}
+
+/* Clear floats after the columns */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
