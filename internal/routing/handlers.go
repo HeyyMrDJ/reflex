@@ -93,6 +93,7 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 }
 
 func serveFlex(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Cache-Control", "max-age=0, no-cache, no-store, must-revalidate")
     vars := mux.Vars(r)
     route := vars["route"]
 
@@ -227,6 +228,7 @@ func serveCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 func serveUpdate(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Cache-Control", "max-age=0, no-cache, no-store, must-revalidate")
     my_keys := getAllKeys()
     
     tmpl, err := template.ParseFiles("templates/update.html", "templates/base.html")
