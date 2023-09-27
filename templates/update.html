@@ -6,8 +6,8 @@
             <form action="/set" method="POST">
                 <label for="route">Name (eg. yt)</label>
                 <select name="route" id="route" class="select-dropdown">
-                    {{range .}}
-                    <option value="{{.Key}}">{{.Key}}</option>
+                    {{range $key, $value := .}}
+                    <option value="{{$key}}">{{$key}}</option>
                     {{end}}
                 </select>
                 

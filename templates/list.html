@@ -2,27 +2,18 @@
   <div class="row">
       <div class="column side">
         <h2>Pinned Flexes</h2>
-        <p>This could be common links we decide to pin</p>
-        {{range .Keys}}
-        <p><a href="test1">{{ .Key }}</a>: {{ .Key }}</p>
+        {{range $key, $value := .PinnedFlexes}}
+                <div class="card-header"><a href="{{$value}}">re/{{$key}}</a></div>
         {{end}}
       </div>
-      
       <div class="column middle">
         <h1>All Flexes</h1>
-            {{range .Keys}}
-            <div class="item">
-                <div class="card-header"><a href="{{.Value}}">re/{{.Key}}</a></div>
-                <div class="card-text">{{ .Value }}</div>
-            </div>
+            {{range $key, $value := .Flexes}}
+                <div class="item">
+                    <div class="card-header"><a href="{{$value}}">re/{{$key}}</a></div>
+                    <div class="card-text">{{$value}}</div>
+                </div>
             {{end}}
-      </div>
-      
-      <div class="column side">
-        <h2>Most Used</h2>
-        {{range .MostUsed}}
-            <p>{{ .Flexes }} xx hits</p>
-        {{end}}
       </div>
   </div>
 {{ end }}
