@@ -15,7 +15,6 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-const BASEURL string = "http://re:9069"
 var ctx = context.Background()
 var redisClient *redis.Client
 

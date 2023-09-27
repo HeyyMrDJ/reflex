@@ -3,9 +3,9 @@
         <div class="card">
             <p>
                 {{ if eq .Action "created" }}
-                    Flex created: <a href="http://re/{{ .Flex }}">re/{{ .Flex }}</a>
+                    Flex created: <a href="{{ .Flex }}">{{ .Flex }}</a>
                 {{ else if eq .Action "updated" }}
-                    Flex updated: <a href="http://re/{{ .Flex }}">re/{{ .Flex }}</a>
+                    Flex updated: <a href="{{ .Flex }}">{{ .Flex }}</a>
                 {{ else if eq .Action "deleted" }}
                     Flex deleted: {{ .Flex }}
                 {{ else }}

@@ -3,14 +3,14 @@
       <div class="column side">
         <h2>Pinned Flexes</h2>
         {{range $key, $value := .PinnedFlexes}}
-                <div class="card-header"><a href="{{$value}}">re/{{$key}}</a></div>
+                <div class="card-header"><a href="{{$value}}">{{$key}}</a></div>
         {{end}}
       </div>
       <div class="column middle">
         <h1>All Flexes</h1>
             {{range $key, $value := .Flexes}}
                 <div class="item">
-                    <div class="card-header"><a href="{{$value}}">re/{{$key}}</a></div>
+                    <div class="card-header"><a href="{{$value}}">{{$key}}</a></div>
                     <div class="card-text">{{$value}}</div>
                 </div>
             {{end}}
