@@ -1,21 +1,33 @@
 package routing
 
 import (
+	"context"
+	"encoding/json"
 	"fmt"
+	"html/template"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"context"
-	"html/template"
-	"github.com/redis/go-redis/v9"
+
+	"github.com/HeyyMrDJ/reflex/internal/redisreflex"
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	"github.com/HeyyMrDJ/reflex/internal/redisreflex"
+	"github.com/redis/go-redis/v9"
 )
 
 var ctx = context.Background()
 var redisClient *redis.Client
+
+type Flex struct {
+    Name string `json:"name"`
+    Hits int `json:"hits"`
+}
+
+type Data struct {
+    Flexes []Flex
+}
 
 type Message struct {
     Action  string
@@ -23,23 +35,12 @@ type Message struct {
     Route   string
 }
 
-func NotFound(w http.ResponseWriter, r *http.Request, route string) {
-    // Set a custom message in the response body
-    w.WriteHeader(http.StatusNotFound)
-    notFoundCount.Inc()
-    fmt.Fprintln(w, "Path not found:", route)
-}
-
-func test(w http.ResponseWriter, r *http.Request) {
-    _, _ = redisreflex.GetRedisValue("noob", *&redisClient, ctx)
-    fmt.Fprintln(w, "Redis value set successfully")
-
-}
-func serveHome(w http.ResponseWriter, r *http.Request) {
-    type keyValue struct {
+type keyValue struct {
         Key     string
         Value   string
-    }
+}
+
+func getAllKeys() []keyValue{
     var cursor uint64
     var my_keys []keyValue
     for {
@@ -60,6 +61,48 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
             break
         }
     }
+    return my_keys
+
+}
+
+func GetMostUsed() Data{
+    mostUsed, err := os.Open("mostused.json")
+    if err != nil {
+        log.Fatal("Error opening mostused.json", nil)
+        return Data{}
+    }
+    defer mostUsed.Close()
+    byteValue, err := ioutil.ReadAll(mostUsed)
+    if err != nil {
+        log.Fatal("Error parsing mostused.json", nil)
+    }
+    var data Data
+    json.Unmarshal(byteValue, &data)
+
+    fmt.Println(data)
+    return data
+}
+
+func NotFound(w http.ResponseWriter, r *http.Request, route string) {
+    // Set a custom message in the response body
+    w.WriteHeader(http.StatusNotFound)
+    notFoundCount.Inc()
+    fmt.Fprintln(w, "Path not found:", route)
+}
+
+func test(w http.ResponseWriter, r *http.Request) {
+    _, _ = redisreflex.GetRedisValue("noob", *&redisClient, ctx)
+    fmt.Fprintln(w, "Redis value set successfully")
+
+}
+func serveHome(w http.ResponseWriter, r *http.Request) {
+    type Content struct {
+        Keys    []keyValue
+        MostUsed    Data
+    }
+    my_keys := getAllKeys()
+    mostUsed := GetMostUsed()
+    content := Content{my_keys, mostUsed}
 
     tmpl, err := template.ParseFiles("templates/list.html", "templates/base.html")
     if err != nil {
@@ -71,7 +114,7 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
         kv := keyValue{"TEST", "ME"}
         my_keys = append(my_keys, kv)
     }
-    err = tmpl.ExecuteTemplate(w, "base.html", my_keys)
+    err = tmpl.ExecuteTemplate(w, "base.html", content)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
     }
@@ -212,10 +255,6 @@ func serveCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 func serveUpdate(w http.ResponseWriter, r *http.Request) {
-    type keyValue struct {
-        Key     string
-        Value   string
-    }
     var cursor uint64
     var my_keys []keyValue
     for {
@@ -252,10 +291,6 @@ func serveUpdate(w http.ResponseWriter, r *http.Request) {
 
 func serveDelete(w http.ResponseWriter, r *http.Request) {
     fmt.Println("serveDelete")
-    type keyValue struct {
-        Key     string
-        Value   string
-    }
     var cursor uint64
     var my_keys []keyValue
     for {

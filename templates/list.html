@@ -3,16 +3,14 @@
       <div class="column side">
         <h2>Pinned Flexes</h2>
         <p>This could be common links we decide to pin</p>
-                <p><a href="test1">re/test1</a>: test1</p>
-                <p><a href="test1">re/test1</a>: test1</p>
-                <p><a href="test1">re/test1</a>: test1</p>
-                <p><a href="test1">re/test1</a>: test1</p>
-                <p><a href="test1">re/test1</a>: test1</p>
+        {{range .Keys}}
+        <p><a href="test1">{{ .Key }}</a>: {{ .Key }}</p>
+        {{end}}
       </div>
       
       <div class="column middle">
         <h1>All Flexes</h1>
-            {{range .}}
+            {{range .Keys}}
             <div class="item">
                 <div class="card-header"><a href="{{.Value}}">re/{{.Key}}</a></div>
                 <div class="card-text">{{ .Value }}</div>
@@ -21,18 +19,10 @@
       </div>
       
       <div class="column side">
-        <h2>Recent Changes</h2>
-        </p>This could be most recent changes</p>
-        <p>git changed from ado to github</p>
-        <p>deploy changed from ado to ArgoCD</p>
-        <br>
-
         <h2>Most Used</h2>
-        </p>This could be most used custom flexes</p>
-        </p>git with 765 hits</P>
-        </p>yt with 65 hits</P>
-        </p>ado with 5 hits</P>
-
+        {{range .MostUsed}}
+            <p>{{ .Flexes }} xx hits</p>
+        {{end}}
       </div>
   </div>
 {{ end }}

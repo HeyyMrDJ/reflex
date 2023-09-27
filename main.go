@@ -16,6 +16,7 @@ import (
 
 func main() {
     RE_PORT := os.Getenv("RE_PORT")
+    routing.GetMostUsed()
     router := mux.NewRouter()
     routing.ConfigureRoutes(router)
 
