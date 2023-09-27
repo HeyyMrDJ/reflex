@@ -5,14 +5,14 @@
             <h1>Delete Entry</h1>
             
             <form action="/deleteme" method="POST" onsubmit="return validateForm()">
-                <label for="route">Name:</label>
+                <label for="route">Flex Name</label>
                 <select name="route" id="route" class="select-dropdown">
                     {{range .}}
                     <option class="dropdown" value="{{.Key}}">{{.Key}}</option>
                     {{end}}
                 </select>
                 
-                <label for="flex">Destination:</label>
+                <label for="flex">Type name to confirm delete</label>
                 <input type="text" name="flex" id="flex" placeholder="Enter a value">
                 <button type="submit">Submit</button>
 

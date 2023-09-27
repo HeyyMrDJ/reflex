@@ -120,7 +120,7 @@ func createFlex(w http.ResponseWriter, r *http.Request) {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
-    msg := Message{"Flex Created: ", route, value}
+    msg := Message{"created", route, value}
     err = tmpl.ExecuteTemplate(w, "base.html", msg)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -156,7 +156,7 @@ func deleteFlex(w http.ResponseWriter, r *http.Request) {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
-    msg := Message{"Flex deleted: ", route, value}
+    msg := Message{"deleted", route, value}
     err = tmpl.ExecuteTemplate(w, "base.html", msg)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -191,7 +191,7 @@ func updateFlex(w http.ResponseWriter, r *http.Request) {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
-    msg := Message{"Flex updated: ", route, value}
+    msg := Message{"updated", route, value}
     err = tmpl.ExecuteTemplate(w, "base.html", msg)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)

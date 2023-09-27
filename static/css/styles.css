@@ -85,9 +85,11 @@ body {
 }
 
 .centered-card .card form label,
-.centered-card .card form input,
+.centered-card .card form input {
+    width: 250px;
+}
 .centered-card .card form button {
-    width: 100%; /* Make form elements take the full width of the card */
+    width: 200px; /* Make form elements take the full width of the card */
 }
 
 button {
@@ -102,6 +104,7 @@ button {
 button:hover {
   colar: black;
   transform: scale(1.02);
+  width: 100px;
 }
 
 label {
@@ -114,11 +117,12 @@ label {
 
 #route {
     /*margin-bottom: 20px;*/
-    width: 200px;
     height: 30px;
     background-color: #000000;
     color: white;
     margin-bottom: 20px;
+        width: 250px;
+
 }
 
 #route form input{
@@ -234,3 +238,8 @@ form input {
   display: table;
   clear: both;
 }
+
+h2 {
+    margin-top: 20px;
+}
+

@@ -4,14 +4,14 @@
             <h1>Edit Entry</h1>
             
             <form action="/set" method="POST">
-                <label for="route">Name:</label>
+                <label for="route">Name (eg. yt)</label>
                 <select name="route" id="route" class="select-dropdown">
                     {{range .}}
                     <option value="{{.Key}}">{{.Key}}</option>
                     {{end}}
                 </select>
                 
-                <label for="flex">Destination:</label>
+                <label for="flex">New route (eg. https://google.com)</label>
                 <input type="text" name="flex" placeholder="Enter a value">
                 <button type="submit">Submit</button>
             </form>

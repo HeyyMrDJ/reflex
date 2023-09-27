@@ -1,8 +1,17 @@
 {{ define "content" }}
     <div class="centered-card">
         <div class="card">
-            {{ .Action }}
-            {{ .Flex }}
+            <p>
+                {{ if eq .Action "created" }}
+                    Flex created: <a href="http://re/{{ .Flex }}">re/{{ .Flex }}</a>
+                {{ else if eq .Action "updated" }}
+                    Flex updated: <a href="http://re/{{ .Flex }}">re/{{ .Flex }}</a>
+                {{ else if eq .Action "deleted" }}
+                    Flex deleted: {{ .Flex }}
+                {{ else }}
+                    Unknown action for Flex.
+                {{ end }}
+            </p>
         </div>
     </div>
 {{ end }}
